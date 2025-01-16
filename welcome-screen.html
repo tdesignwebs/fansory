@@ -5,27 +5,540 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
+    <title>Home Page</title>
+    <script src="https://cdn.jsdelivr.net/npm/ionicons@5.5.3/dist/ionicons.js"></script> <!-- Ionicons for icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Oleo+Script+Swash+Caps:wght@400;700&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet">
     <style>
         body {
-            background: linear-gradient(-5deg, #1A1C21, #101318);
-            padding: 0;
             margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+
+        .navbar {
+            width: 100%;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: rgba(133, 67, 67, 0);
+            position: relative;
+            /* Ensure relative positioning for absolute children */
+        }
+
+        .hamburger-icon {
+            width: 50px;
+            margin-left: 20px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0);
+            justify-content: center;
+            align-items: center;
+            display: grid;
+        }
+
+        .hamburger-line-1,
+        .hamburger-line-2,
+        .hamburger-line-3 {
+            height: 5px;
+            background-color: black;
+            border-radius: 10px;
+        }
+
+        .hamburger-line-1 {
+            width: 40px;
+        }
+
+        .hamburger-line-2 {
+            width: 30px;
+        }
+
+        .hamburger-line-3 {
+            width: 20px;
+        }
+
+        .navbar-logo-icon {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        img {
+            width: 60px;
+            height: 70px;
+        }
+
+        .button-login-style {
+            width: 150px;
+            border-radius: 30px;
+            background: linear-gradient(35deg, #670065, #0d007e);
+            border: 1px solid white;
+            color: white;
+            height: 40px;
+            margin-right: 20px;
         }
 
 
-        @media (max-width: 360px) {
-            .container {
-                width: 100%;
-                height: 100vh;
-                overflow: hidden;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                background: #101318;
-            }
 
-            .main {
+        .main {
+            height: fit-content;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .welcome-text {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 120px;
+            background-color: rgba(240, 255, 255, 0);
+            margin-top: 30px;
+
+        }
+
+        h1 {
+            width: 500px;
+            font-family: Onest, sans-serif;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        h2 {
+            width: fit-content;
+            font-family: Onest, sans-serif;
+            color: white;
+            z-index: 3;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            text-align: center;
+        }
+
+
+        .calculator {
+            width: 700px;
+            margin-top: 30px;
+            max-width: 700px;
+            overflow: hidden;
+            height: 400px;
+
+            background: url(./img/output-bg.png);
+            background-position: center;
+            background-size: cover;
+            border-radius: 20px;
+            display: flex;
+            position: relative;
+            align-items: center;
+            flex-direction: column;
+
+        }
+
+        .bg {
+            background: linear-gradient(0deg, rgba(0, 0, 0, 0.518), rgba(0, 0, 0, 0.311));
+            width: 100%;
+            height: 100%;
+            width: 700px;
+            max-width: 700px;
+            overflow: hidden;
+            height: 400px;
+            border-radius: 20px;
+            display: flex;
+            position: relative;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .calculator-input-systeem {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            width: 600px;
+            justify-content: center;
+            gap: 10px;
+            background-color: rgba(240, 248, 255, 0);
+            margin-top: -20px;
+        }
+
+        .calculator-output-box {
+            width: 600px;
+            margin-top: 15px;
+            height: 200px;
+            background-color: transparent;
+        }
+
+        .calculator-input-button {
+            width: 148px;
+            display: flex;
+            flex-direction: row;
+            z-index: 3;
+            align-items: center;
+            justify-content: center;
+            height: 40px;
+            padding: 4px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .calculator-input-button-holder {
+            width: 150px;
+            border-radius: 50px;
+            height: 36px;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            border: none;
+            background-color: transparent;
+            outline: none;
+        }
+
+        .calculator-input-button-holder::placeholder {
+            color: rgb(223, 223, 223);
+            font-size: 12px;
+            font-family: sans-serif;
+        }
+
+        .calculator-input-button-holder:focus {
+            border: 1px solid rgba(255, 255, 255, 0.987);
+            outline: none;
+        }
+
+
+        .calculator-logo-img-background-effect {
+            position: absolute;
+            top: 30px;
+            z-index: 2;
+        }
+
+        .calculator-button-output {
+            width: 148px;
+            margin-top: 10px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            height: 40px;
+            z-index: 3;
+            background: rgba(255, 255, 255, 0.421);
+            border-radius: 50px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+
+        select {
+            appearance: none;
+            outline: 10px rgb(252, 252, 255);
+            border: 0;
+            height: 90%;
+            box-shadow: none;
+            /* Personalize */
+            border-radius: 15px;
+            flex: 1;
+            z-index: 2;
+            font-family: sans-serif;
+            width: 100%;
+            padding: 0 1em;
+            display: flex;
+            color: #fff;
+            background-color: #2c3e5000;
+            background-image: none;
+            cursor: pointer;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .calculator-output-box-holder {
+            width: 100%;
+            height: fit-content;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            background-color: #00ffe100;
+            color: white;
+        }
+
+
+
+        .calculator-output-box-main-box {
+            height: 100px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            width: 588px;
+            z-index: 3;
+            margin: 30px 0 0 0;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.272);
+            border-radius: 15px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+
+
+        .main-box-output {
+            background: rgba(0, 0, 0, 0.589);
+            margin-top: 10px;
+            width: 130px;
+            height: 120px;
+            display: flex;
+            flex-direction: column;
+            padding: 0;
+            align-items: center;
+            border-radius: 15px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .calculator-output-box-names-left {
+            background-color: rgba(0, 0, 0, 0);
+            width: 100%;
+            height: 50px;
+            font-size: 20px;
+            color: black;
+            margin: 0;
+            align-items: center;
+            justify-content: center;
+            display: flex;
+        }
+
+
+        p {
+            font-family: sans-serif;
+        }
+
+        .calculator-output-box-output-left {
+            background-color: rgba(69, 44, 44, 0);
+            width: 100%;
+            height: 25px;
+            color: black;
+            margin: 5px 0 0 -10px;
+            font-size: 17px;
+            align-items: center;
+            justify-content: space-around;
+            display: flex;
+        }
+
+        .output-text-name {
+            color: rgb(233, 233, 233);
+        }
+
+        .calculator-blur-effect-blue-color {
+            width: 250px;
+            height: 400px;
+            position: absolute;
+            top: 0px;
+            z-index: 1;
+            filter: blur(50px);
+            left: -40px;
+            background-color: rgb(0, 0, 115);
+        }
+
+        .calculator-blur-effect-pink-color {
+            width: 250px;
+            height: 400px;
+            position: absolute;
+            top: 40px;
+            z-index: 1;
+            filter: blur(80px);
+            right: 30px;
+            background-color: rgb(164, 0, 170);
+        }
+
+        .calculator-blur-effect-purple-color {
+            width: 250px;
+            height: 400px;
+            position: absolute;
+            top: 30px;
+            z-index: 1;
+            filter: blur(80px);
+            right: 250px;
+            background-color: rgb(97, 0, 177);
+        }
+
+        .calculator-starter-text {
+            width: 70%;
+            margin: 20px 0 40px 0;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            height: 40px;
+            z-index: 3;
+            background: rgba(255, 255, 255, 0.421);
+            border-radius: 50px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .calculator-output-box-names {
+            background-color: rgba(206, 206, 206, 0);
+            width: 588px;
+            align-items: center;
+            display: flex;
+            justify-content: center;
+            height: 40%;
+        }
+
+        .calculator-output-box-output {
+            background-color: rgba(206, 206, 206, 0);
+            width: 100%;
+            align-items: center;
+            display: flex;
+            justify-content: space-around;
+            height: 40%;
+        }
+
+        .cal-name {
+            width: 90px;
+            display: flex;
+            color: white;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .cal-number {
+            width: 90px;
+            display: flex;
+            color: white;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .calculator-output-main-box {
+            width: 700px;
+            height: 150px;
+            background: url(./img/output-bg.png);
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 20px;
+            border-radius: 20px;
+            margin-bottom: 20px;
+        }
+
+        .calculator-output-structure {
+            height: 110px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            width: 588px;
+            z-index: 3;
+            background: rgba(255, 255, 255, 0.272);
+            border-radius: 20px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            align-items: center;
+
+
+        }
+
+        .output-bg {
+            width: 700px;
+            height: 150px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(0deg, rgba(0, 0, 0, 0.581), rgba(0, 0, 0, 0.463));
+        }
+
+        .foods {
+            width: 700px;
+            height: fit-content;
+            display: flex;
+            margin: 20px 0 20px 0;
+            align-items: center;
+            justify-content: center;
+            border-radius: 20px;
+
+            background-color: rgba(255, 255, 255, 0);
+        }
+
+        .wrap {
+            width: 220px;
+            height: 360px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            background-color: #ffffff;
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .food-img {
+            width: 220px;
+            height: 220px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-position: center;
+            background-size: cover;
+            border-radius: 20px 20px 0 0;
+
+        }
+
+        .hamburger-img {
+            background-position: center;
+            background-size: cover;
+            margin: 0 0 20px 0;
+            width: 200px;
+            height: 200px;
+            border-radius: 20px 20px 0 0;
+        }
+
+        .food-information {
+            height: 140px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .food-name {
+            height: 50px;
+            width: 95%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        a {
+            font-weight: 400;
+            font-family: "Roboto", serif;
+            font-size: 18px;
+            font-style: normal;
+            text-decoration: none;
+            color: rgb(255, 255, 255);
+        }
+        .main-1 {
                 display: flex;
                 height: 100vh;
                 overflow: hidden;
@@ -34,103 +547,542 @@
                 justify-content: space-between;
             }
 
-            img {
-                width: 100%;
-                height: 100%;
-            }
+        h4 {
+            font-family: "Oleo Script Swash Caps", serif;
+            font-weight: 500;
+            font-size: 25px;
+            color: black;
+            text-align: center;
+            line-height: 1;
+            text-align: center;
+        }
 
-            .top {
-                width: 100%;
-                height: 50vh;
+        h5 {
+            font-weight: 400;
+            font-family: "Roboto", serif;
+            font-size: 14px;
+            color: black;
+            font-style: normal;
+        }
 
-            }
+        .food-time {
+            display: flex;
+            height: 30px;
+            width: fit-content;
+            align-items: center;
+            gap: 10px;
 
-            .bottom {
-                width: 100%;
-                height: 50vh;
-                flex-direction: column;
-                justify-content: space-evenly;
-                display: flex;
-                align-items: center;
-                
-            }
+        }
 
+        .food-kcal {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            width: 90px;
+            height: 30px;
+        }
 
-            .main-box-white {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                flex-direction: column;
-                margin: -120px 0px 0px 0px;
-            }
-            .button{
-                width: 300px;
-                height: 50px;
-                border-radius: 50px;
-                border: 0.5px solid rgba(255, 255, 255, 0.6);
-                background-color: rgba(255, 255, 255, 0.2);
-                display: flex;
-                align-items: center;
-                justify-content: center;
-            }
-            h1{
-                color: white;
-                font-family: sans-serif;
-                font-size: 17px;
-            }
-            .text-welcome{
-                color: white;
-                font-family: sans-serif;
-                font-size: 30px;
-            }
-            .text-info{
-                color: rgba(255, 255, 255, 0.6);
-                font-family: sans-serif;
-                font-size: 14px;
-                font-weight: normal;
-                
-            }
-            .text-box{
-                width: 300px;
-                margin-top: -80px;
-             
-            }
-            
+        .food-star {
+            display: flex;
+            height: 35px;
+            align-items: center;
+            width: 90px;
+            gap: 10px;
+            justify-content: center;
+        }
 
+        .search-main {
+            width: 700px;
+            height: 100px;
+            background-color: #ffffff;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
 
+        .search-input-button {
+            width: 148px;
+            display: flex;
+            flex-direction: row;
+            z-index: 3;
+            align-items: center;
+            justify-content: center;
+            height: 40px;
+            margin: 0 0 0 10px;
+
+            padding: 4px;
+            color: black;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .search-button-output {
+            width: 148px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            color: black;
+            margin: 0 0 0 10px;
+            justify-content: center;
+            height: 40px;
+            z-index: 3;
+            background: rgba(255, 255, 255, 0.421);
+            border-radius: 50px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .search-input-button-holder {
+            width: 150px;
+            border-radius: 50px;
+            height: 36px;
+            color: black;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            border: none;
+            background-color: transparent;
+            outline: none;
+        }
+
+        span {
+            color: rgb(0, 0, 0);
+        }
+
+        .span-star {
+            color: rgb(245, 176, 0);
+            font-weight: 400;
+            font-family: "Roboto", serif;
+            font-size: 14px;
+            font-style: normal;
+        }
+
+        .food-list-1 {
+            width: 700px;
+        }
+
+        .foodList {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            align-content: start;
+            justify-content: start;
+        }
+
+        .cal-numb {
+            color: white;
         }
     </style>
 </head>
 
 <body>
-    <div class="container">
-        <div class="main">
 
-            <div class="top">
-                <img src="./food/removed-bg/fruit/hamburger-welcome.png"
-                    alt="">
-            </div>
-            <div class="bottom">
-            
-                            <svg class="main-box-white" width="360" height="54" viewBox="0 0 360 38" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M0 15.5C0 15.5 11.7397 -4.21148 23.032 -2.49998C36.0075 -0.533379 24.389 24.5545 37.0515 28C52.0517 32.0816 47.217 -4.8373 62.5869 -2.49998C76.3781 -0.402742 81.1127 28 81.1127 28C81.1127 28 87.1264 -0.518907 101.641 -4.99998C120.445 -10.8052 120.511 23.6004 139.694 28C165.011 33.8066 176.138 -11.2538 199.777 -0.499985C213.037 5.53207 223.811 28 223.811 28C223.811 28 227.896 12.8173 235.828 11C243.585 9.22255 253.853 20.5 253.853 20.5C253.853 20.5 263.044 -6.67627 275.883 -4.49998C288.126 -2.42491 289.903 24 289.903 24C289.903 24 310.932 -3.49997 314.937 -0.499985C318.943 2.5 327.955 28 327.955 28L344.478 11L360 15V37H0V15.5Z"  fill="#101318"/>
-                                </svg>
-                                
-                            <div class="text-box">
-                                <h1 class="text-welcome">Welcome to Fansory</h1>
-                                <h1 class="text-info">we make the best easy using tracking app out there and we hope we can help you out the easy way </h1>
-                            </div>
-                    
-                <div class="button">
-                    <h1>Get started</h1>
+
+
+    <!----------------------------NAVBAR----------------------------->
+    <div class="navbar">
+        <div class="hamburger-icon">
+            <div class="hamburger-line-1"></div>
+            <div class="hamburger-line-2"></div>
+            <div class="hamburger-line-3"></div>
+        </div>
+
+        <div class="navbar-logo-icon">
+            <img src="img/logo.png" alt="Logo">
+        </div>
+
+        <button class="button-login-style">Login</button>
+    </div>
+
+
+
+
+
+
+    <div class="main">
+
+
+
+        <!----------------------------WELCOME TEXT----------------------------->
+        <div class="welcome-text">
+            <h1>High-Protein, Low-Fat Foods for Everyday Enjoyment!</h1>
+        </div>
+
+
+
+
+
+
+
+        <!----------------------------CALCULATOR----------------------------->
+        <div class="calculator">
+            <div class="bg">
+
+
+
+                <div class="calculator-starter-text">
+                    <h2>Calculate with us your daily eatings</h2>
+                </div>
+                <div class="calculator-input-systeem">
+                    <button class="calculator-input-button"> <input class="calculator-input-button-holder" type="text"
+                            id="age" placeholder="age"></button>
+
+                    <button class="calculator-input-button"><input class="calculator-input-button-holder" type="text"
+                            id="weight" placeholder="weight (KG)"></button>
+
+                    <button class="calculator-input-button"><input class="calculator-input-button-holder" type="text"
+                            id="height" placeholder="height (CM)"></button>
+
+
+
+                    <button class="calculator-input-button">
+                        <select class="section-button" id="gender">
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                        </select>
+                    </button>
+
+
+                    <button class="calculator-input-button">
+                        <select class="section-button" id="activity">
+                            <option value="1.2">Sedentary (little to no exercise)</option>
+                            <option value="1.375">Lightly active (light exercise 1-3 days/week)</option>
+                            <option value="1.55">Moderately active (moderate exercise 3-5 days/week)</option>
+                            <option value="1.725">Very active (hard exercise 6-7 days/week)</option>
+                            <option value="1.9">Extra active (very hard exercise or a physical job)</option>
+                        </select>
+                    </button>
+
+                    <button class="calculator-input-button">
+                        <select class="section-button" id="goal">
+                            <option value="cutting">Cutting (Fat Loss)</option>
+                            <option value="bulking">Bulking (Muscle Gain)</option>
+                            <option value="maintenance">Maintenance</option>
+                            <option value="recomp">Recomposition (Fat Loss + Muscle Gain)</option>
+                        </select>
+                    </button>
+
+
                 </div>
 
+                <button class="calculator-button-output" onclick="calculateNutrition()">Calculate</button>
+
+
+
+
+                <div class="calculator-output-box" id="result">
+                    <div class="calculator-output-box-holder">
+                        <div class="calculator-output-box-main-box">
+                            <div class="calculator-output-box-names">
+                                <p class="cal-name">Calories</p>
+                                <p class="cal-name">Protein</p>
+                                <p class="cal-name">Carbs</p>
+                                <p class="cal-name">Fats</p>
+                                <p class="cal-name">Sugar</p>
+                                <p class="cal-name">Fiber</p>
+                                <p class="cal-name">Salt</p>
+                            </div>
+                            <div class="calculator-output-box-output">
+                                <p class="cal-number"> <span class="cal-numb" id="calories"></span> kcal </p>
+                                <p class="cal-number"> <span class="cal-numb" id="protein"></span> g </p>
+                                <p class="cal-number"> <span class="cal-numb" id="carbs"></span> g </p>
+                                <p class="cal-number"> <span class="cal-numb" id="fats"></span> g </p>
+                                <p class="cal-number"> <span class="cal-numb" id="sugar"></span> g </p>
+                                <p class="cal-number"> <span class="cal-numb" id="fiber"></span> g </p>
+                                <p class="cal-number"> <span class="cal-numb" id="salt"></span> g </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
             </div>
-
-
-
         </div>
+
+
+
+
+
+
+
+        <!----------------------------CALCULATOR OUTPUT LEFT----------------------------->
+        <div class="calculator-output-main-box">
+            <div class="output-bg">
+                <div class="calculator-output-box-holder">
+                    <div class="calculator-output-structure">
+                        <div class="calculator-output-box-names-left">
+                            <p class="cal-name">Calories</p>
+                            <p class="cal-name">Protein</p>
+                            <p class="cal-name">Carbs</p>
+                            <p class="cal-name">Fats</p>
+                            <p class="cal-name">Sugar</p>
+                            <p class="cal-name">Fiber</p>
+                            <p class="cal-name">Salt</p>
+                        </div>
+                        <div class="calculator-output-box-output-left">
+                            <p class="cal-number"> <span id="calories-left"></span> <a>kcal</a> </p>
+                            <p class="cal-number"> <span id="protein-left"></span> <a>g</a> </p>
+                            <p class="cal-number"> <span id="carbs-left"></span> <a>g</a> </p>
+                            <p class="cal-number"> <span id="fats-left"></span> <a>g</a> </p>
+                            <p class="cal-number"> <span id="sugar-left"></span> <a>g</a> </p>
+                            <p class="cal-number"> <span id="fiber-left"></span> <a>g</a> </p>
+                            <p class="cal-number"> <span id="salt-left"></span> <a>g</a> </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+        <!----------------------------SEARCH BUTTONS----------------------------->
+        <form class="search-main" id="searchForm">
+            <button class="search-input-button"><input class="search-input-button-holder" type="text" id="input-1"
+                    placeholder="Search by name" /></button>
+            <button class="search-input-button"> <input class="search-input-button-holder" type="number" id="input-2"
+                    placeholder="Max kcal" /></button>
+            <button class="search-button-output" type="submit">Search</button>
+            <button class="search-button-output" onclick="addItem(203, 10, 0, 2, 5, 55, 10)">Add Item</button>
+        </form>
+
+
+
+
+
+
+        <!----------------------------FOODS----------------------------->
+        <div class="foods">
+            <div class="food-list-1">
+                <div class="foodList" id="foodList"></div>
+                <!----------------------------FOOD WILL BE DISPLAYED HERE----------------------------->
+            </div>
+        </div>
+
+
+
+
+
     </div>
+
 </body>
+<script>
+    const foods = [
+        {
+            name: "Shake",
+            prepTime: "15-30 min",
+            kcal: 250,
+            image: "./food/shake/blue-fram-mure-mix.png",
+            rating: 4.6,
+            url: "./product/shake.html" // Add a unique URL
+        },
+        {
+            name: "Hamburger",
+            prepTime: "15-30 min",
+            kcal: 250,
+            image: "/food/hamburger/hamburger.png",
+            rating: 4.4,
+            url: "./product/hamburger.html"
+        },
+        {
+            name: "Pizza",
+            prepTime: "15-30 min",
+            kcal: 250,
+            image: "./food/pizza/pizza-tonno.png",
+            rating: 4.7,
+            url: "./product/pizza.html"
+        },
+        {
+            name: "Fruit",
+            prepTime: "10-20 min",
+            kcal: 300,
+            image: "./food/fruit/ananas.png",
+            rating: 5,
+            url: "./product/fruit.html"
+        },
+        {
+            name: "Wraps",
+            prepTime: "10-20 min",
+            kcal: 300,
+            image: "./food/wraps/chicken-wrap.png",
+            rating: 4.2,
+            url: "./product/wrap.html"
+        }
+    ];
+
+    // Function to generate food cards dynamically
+    const foodList = document.getElementById('foodList');
+
+    foods.forEach(food => {
+        const foodItem = document.createElement('a');
+        foodItem.classList.add('wrap');
+        foodItem.href = food.url; // Set the unique URL as href
+
+        // Updated rating logic: single star followed by the rating
+        const stars = `★ ${food.rating.toFixed(1)}`;
+
+        foodItem.innerHTML = `
+        <div class="food-img" style="background-image: url('${food.image}');">
+        </div>
+        <div class="food-information">
+          <div class="food-name">
+            <h4>${food.name}</h4>
+          </div>
+          <div class="food-time">
+            <ion-icon name="time-outline"></ion-icon>
+            <h5>${food.prepTime}</h5>
+          </div>
+          <div class="food-kcal">
+            <ion-icon name="flame-outline"></ion-icon>
+            <h5>${food.kcal} kcal</h5>
+          </div>
+          <div class="food-star">
+            <span class="span-star">${stars}</span>
+          </div>
+        </div>
+      `;
+        foodList.appendChild(foodItem);
+    });
+
+    // Filtering functionality
+    document.getElementById('searchForm').addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        const query = {
+            name: document.getElementById('input-1').value.toLowerCase(),
+            kcal: document.getElementById('input-2').value
+        };
+
+        const foods = document.querySelectorAll('.wrap');
+        foods.forEach(food => {
+            const name = food.querySelector('h4').innerText.toLowerCase();
+            const kcal = parseInt(food.querySelector('.food-kcal h5').innerText, 10);
+
+            if (
+                (name.includes(query.name) || !query.name) &&
+                (query.kcal === "" || kcal <= parseInt(query.kcal, 10))
+            ) {
+                food.style.display = 'block';
+            } else {
+                food.style.display = 'none';
+            }
+        });
+    });
+</script>
+
+
+<script>
+    let remainingValues = {
+        calories: 0,
+        protein: 0,
+        carbs: 0,
+        fats: 0,
+        sugar: 0,
+        salt: 0,
+        fiber: 0
+    };
+
+    function calculateNutrition() {
+        const age = parseInt(document.getElementById("age").value);
+        const weight = parseFloat(document.getElementById("weight").value);
+        const height = parseFloat(document.getElementById("height").value);
+        const gender = document.getElementById("gender").value;
+        const activity = parseFloat(document.getElementById("activity").value);
+        const goal = document.getElementById("goal").value;
+
+        if (!age || !weight || !height) {
+            alert("Please fill out all fields!");
+            return;
+        }
+
+        // Calculate BMR (Mifflin-St Jeor Equation)
+        let bmr;
+        if (gender === "male") {
+            bmr = 10 * weight + 6.25 * height - 5 * age + 5;
+        } else {
+            bmr = 10 * weight + 6.25 * height - 5 * age - 161;
+        }
+
+        const maintenanceCalories = Math.round(bmr * activity);
+
+        // Adjust for goal
+        let targetCalories;
+        if (goal === "cutting") {
+            targetCalories = maintenanceCalories - 500;
+        } else if (goal === "bulking") {
+            targetCalories = maintenanceCalories + 500;
+        } else {
+            targetCalories = maintenanceCalories;
+        }
+
+        // Macronutrient calculations
+        const protein = Math.round((targetCalories * 0.3) / 4); // 30% protein
+        const carbs = Math.round((targetCalories * 0.4) / 4); // 40% carbs
+        const fats = Math.round((targetCalories * 0.3) / 9); // 30% fats
+
+        // Additional nutrients
+        const sugar = Math.round((carbs * 0.1)); // Assume 10% of carbs are sugars
+        const salt = Math.round(weight * 0.05); // Approximate daily salt need based on weight
+        const fiber = Math.round(weight * 0.14); // Approximate daily fiber need based on weight
+
+        // Calculate remaining values
+        remainingValues.calories = targetCalories;
+        remainingValues.protein = protein;
+        remainingValues.carbs = carbs;
+        remainingValues.fats = fats;
+        remainingValues.sugar = sugar;
+        remainingValues.fiber = fiber;
+        remainingValues.salt = salt;
+
+        // Display results
+        document.getElementById("calories").textContent = targetCalories;
+        document.getElementById("protein").textContent = protein;
+        document.getElementById("carbs").textContent = carbs;
+        document.getElementById("fats").textContent = fats;
+        document.getElementById("sugar").textContent = sugar;
+        document.getElementById("fiber").textContent = fiber;
+        document.getElementById("salt").textContent = salt;
+
+        // Display remaining values
+        document.getElementById("calories-left").textContent = remainingValues.calories;
+        document.getElementById("protein-left").textContent = remainingValues.protein;
+        document.getElementById("carbs-left").textContent = remainingValues.carbs;
+        document.getElementById("fats-left").textContent = remainingValues.fats;
+        document.getElementById("sugar-left").textContent = remainingValues.sugar;
+        document.getElementById("fiber-left").textContent = remainingValues.fiber;
+        document.getElementById("salt-left").textContent = remainingValues.salt;
+    }
+
+    function addItem(caloriesAmount, proteinAmount, carbsAmount, fatsAmount, sugarAmount, fiberAmount, saltAmount) {
+        remainingValues.calories -= caloriesAmount;
+        remainingValues.protein -= proteinAmount;
+        remainingValues.carbs -= carbsAmount;
+        remainingValues.fats -= fatsAmount;
+        remainingValues.sugar -= sugarAmount;
+        remainingValues.fiber -= fiberAmount;
+        remainingValues.salt -= saltAmount;
+
+
+        // Update UI
+        document.getElementById("calories-left").textContent = remainingValues.calories;
+        document.getElementById("protein-left").textContent = remainingValues.protein;
+        document.getElementById("carbs-left").textContent = remainingValues.carbs;
+        document.getElementById("fats-left").textContent = remainingValues.fats;
+        document.getElementById("sugar-left").textContent = remainingValues.sugar;
+        document.getElementById("fiber-left").textContent = remainingValues.fiber;
+        document.getElementById("salt-left").textContent = remainingValues.salt;
+
+    }
+</script>
 
 </html>
