@@ -128,51 +128,74 @@
       });
     }
 
-    function setupInteraction(container, options, data, activeIndex, callback) {
+    function setupSmoothInteraction(container, options, data, activeIndex, callback) {
       let startY = 0;
+      let currentY = 0;
+      let velocity = 0;
+      let isDragging = false;
+      let momentumInterval;
 
-      // Touch support
-      container.addEventListener("touchstart", (e) => {
-        startY = e.touches[0].clientY;
-      });
+      const startDragging = (e) => {
+        isDragging = true;
+        startY = e.touches ? e.touches[0].clientY : e.clientY;
+        clearInterval(momentumInterval);
+      };
 
-      container.addEventListener("touchmove", (e) => {
-        e.preventDefault();
-      });
+      const duringDragging = (e) => {
+        if (!isDragging) return;
+        const y = e.touches ? e.touches[0].clientY : e.clientY;
+        const diff = startY - y;
 
-      container.addEventListener("touchend", (e) => {
-        const endY = e.changedTouches[0].clientY;
-        const diff = startY - endY;
+        currentY += diff;
+        velocity = diff;
+        startY = y;
 
-        if (diff > 30 && activeIndex < data.length - 1) {
-          activeIndex++;
-        } else if (diff < -30 && activeIndex > 0) {
-          activeIndex--;
-        }
-        callback(activeIndex);
-      });
+        let newActiveIndex = Math.round(currentY / 50);
+        if (newActiveIndex < 0) newActiveIndex = 0;
+        if (newActiveIndex > data.length - 1) newActiveIndex = data.length - 1;
 
-      // Mouse scroll support
-      container.addEventListener("wheel", (e) => {
-        e.preventDefault();
-        if (e.deltaY > 0 && activeIndex < data.length - 1) {
-          activeIndex++;
-        } else if (e.deltaY < 0 && activeIndex > 0) {
-          activeIndex--;
-        }
-        callback(activeIndex);
-      });
+        callback(newActiveIndex);
+      };
+
+      const stopDragging = () => {
+        isDragging = false;
+
+        momentumInterval = setInterval(() => {
+          if (Math.abs(velocity) < 1) {
+            clearInterval(momentumInterval);
+            return;
+          }
+
+          currentY += velocity;
+          velocity *= 0.9; // Slow down gradually
+
+          let newActiveIndex = Math.round(currentY / 50);
+          if (newActiveIndex < 0) newActiveIndex = 0;
+          if (newActiveIndex > data.length - 1) newActiveIndex = data.length - 1;
+
+          callback(newActiveIndex);
+        }, 16);
+      };
+
+      container.addEventListener("mousedown", startDragging);
+      container.addEventListener("mousemove", duringDragging);
+      container.addEventListener("mouseup", stopDragging);
+      container.addEventListener("mouseleave", stopDragging);
+
+      container.addEventListener("touchstart", startDragging);
+      container.addEventListener("touchmove", duringDragging);
+      container.addEventListener("touchend", stopDragging);
     }
 
     createOptions(heights, heightOptions, currentHeightIndex);
     createOptions(weights, weightOptions, currentWeightIndex);
 
-    setupInteraction(document.getElementById("height-selector"), heightOptions, heights, currentHeightIndex, (newIndex) => {
+    setupSmoothInteraction(document.getElementById("height-selector"), heightOptions, heights, currentHeightIndex, (newIndex) => {
       currentHeightIndex = newIndex;
       updateActive(heightOptions, heightOptions, currentHeightIndex);
     });
 
-    setupInteraction(document.getElementById("weight-selector"), weightOptions, weights, currentWeightIndex, (newIndex) => {
+    setupSmoothInteraction(document.getElementById("weight-selector"), weightOptions, weights, currentWeightIndex, (newIndex) => {
       currentWeightIndex = newIndex;
       updateActive(weightOptions, weightOptions, currentWeightIndex);
     });
