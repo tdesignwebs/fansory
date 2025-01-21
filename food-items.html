@@ -14,7 +14,7 @@
         }
 
 
-        @media (max-width: 400px) {
+        @media (max-width: 440px) {
             .container {
                 width: 100%;
                 height: 200vh;
@@ -35,6 +35,7 @@
             .bottom-navbar {
                 width: 100%;
                 height: 66px;
+                z-index: 2;
                 position: fixed;
                 display: flex;
                 align-items: center;
@@ -118,7 +119,7 @@
             }
 
             .food-box {
-                width: 326px;
+                width: 80%;
                 height: 600px;
                 margin-top: 20px;
                 background-color: transparent;
@@ -144,7 +145,7 @@
             }
 
             .top-side {
-                width: 326px;
+                width: 100%;
                 height: 70px;
                 display: flex;
                 align-items: center;
@@ -154,7 +155,7 @@
             }
 
             .down-side {
-                width: 326px;
+                width: 100%;
                   z-index: 1;
                 height: 70px;
                 display: flex;
@@ -704,6 +705,23 @@
 
     </div>
 </body>
+<script>
+    const searchInput = document.querySelector('.search-box input');
+    const foodItems = document.querySelectorAll('.food-box .item-1');
+
+    searchInput.addEventListener('input', () => {
+        const filter = searchInput.value.toLowerCase();
+        foodItems.forEach(item => {
+            const foodName = item.querySelector('.food-name-h1-big').textContent.toLowerCase();
+            if (foodName.includes(filter)) {
+                item.style.display = 'flex'; // Show the item
+            } else {
+                item.style.display = 'none'; // Hide the item
+            }
+        });
+    });
+</script>
+
 <script>
     document.querySelectorAll('.nav-item').forEach(item => {
         item.addEventListener('click', function () {
