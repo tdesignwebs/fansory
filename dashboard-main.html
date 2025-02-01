@@ -17,7 +17,8 @@
             padding: 0;
             margin: 0;
         }
-@import url('https://fonts.googleapis.com/css?family=Inter%20Tight:700|Inter%20Tight:400');
+
+        @import url('https://fonts.googleapis.com/css?family=Inter%20Tight:700|Inter%20Tight:400');
 
         @media (max-width: 440px) {
             .container {
@@ -359,7 +360,7 @@
                 align-items: center;
                 justify-content: space-between;
                 bottom: 0;
-                z-index: 2;
+                z-index: 112;
                 background: #1A1C21;
                 border: 1px solid rgba(255, 255, 255, 0.04);
                 box-shadow: inset 0px 1px 0px rgba(255, 255, 255, 0.08);
@@ -372,7 +373,8 @@
                 align-items: center;
                 justify-content: center;
             }
-            .menu-icon-a{
+
+            .menu-icon-a {
                 width: 65px;
                 height: 66px;
                 display: flex;
@@ -399,7 +401,7 @@
                 width: 326px;
                 z-index: 1;
                 display: flex;
-             
+
                 align-items: center;
                 justify-content: space-evenly;
             }
@@ -623,7 +625,8 @@
                 background-color: rgb(119, 75, 0);
                 filter: blur(40px);
             }
-            .background-img-bg{
+
+            .background-img-bg {
                 position: absolute;
                 z-index: 0;
                 display: none;
@@ -634,11 +637,59 @@
                 left: 10px;
                 rotate: -35deg;
             }
-            .main-box{
+
+            .main-box {
                 width: 90%;
             }
-      
 
+            /* Modal styles */
+            #food-modal {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                z-index: 100;
+                background-color: rgba(0, 0, 0, 0.5);
+                justify-content: center;
+                align-items: center;
+            }
+
+            #modal-content {
+                background-color: white;
+                padding: 20px;
+                height: 100%;
+                border-radius: 8px;
+                width: 100%;
+            }
+
+            #food-list {
+                list-style-type: none;
+                padding: 0;
+            }
+
+            #food-list li {
+                margin: 10px 0;
+                cursor: pointer;
+            }
+
+            #food-list li:hover {
+                background-color: #f0f0f0;
+            }
+
+            /* Style for the Add Food button */
+            .add-food-btn {
+                margin-top: 20px;
+            }
+            #added-food-list h1 {
+            color: white;
+        }
+        h5{
+            color: white;
+            font-weight: normal;
+            font-family: sans-serif;
+        }
         }
     </style>
 </head>
@@ -688,6 +739,7 @@
                     </defs>
                 </svg>
                 <h1 class="Fansory">Fansory</h1>
+
             </div>
             <div class="favorite">
                 <svg width="20" height="25" viewBox="0 0 20 25" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -698,12 +750,27 @@
 
             </div>
         </div>
-          <div class="days-count" id="daysCount"></div>
+        <div class="days-count" id="daysCount"></div>
+   
+        <div id="food-modal">
+            <div id="modal-content">
+                <h2>Select Food</h2>
+                <ul id="food-list">
+                    <li data-food="Hamburger" data-calories="250" data-protein="12" data-carbs="30" data-fats="10">
+                        Hamburger</li>
+                    <li data-food="Apple" data-calories="95" data-protein="0" data-carbs="25" data-fats="0">Apple</li>
+                    <li data-food="Banana" data-calories="105" data-protein="1" data-carbs="27" data-fats="0">Banana
+                    </li>
+                </ul>
+                <button id="close-modal">Close</button>
+            </div>
+        </div>
+        <ul id="added-food-list"></ul>
         <div class="main-box">
             <div class="calorie-box">
                 <div class="text-box">
                     <div class="cal-name">
-                        <h1 class="calorie" id="remaining-calories-value"></h1>
+                        <p class="calorie"> <span id="remaining-calories-value">0</span></p>
                     </div>
                     <div class="left-name">
                         <h2 class="calorie-left">Calories left</h2>
@@ -720,12 +787,12 @@
                     </div>
                 </div>
             </div>
-            
+
         </div>
         <div class="other-items">
             <div class="yellow-protein">
                 <div class="yellow-text-box">
-                    <h1 class="calorie" id="remaining-protein-value"></h1>
+                    <p class="calorie"><span id="remaining-protein-value">0</span></p>
                     <h1 class="gram-left-yellow-box">Protein left</h1>
                 </div>
                 <div class="yellow-box-blur">
@@ -744,7 +811,8 @@
 
             <div class="red-carbs">
                 <div class="yellow-text-box">
-                    <h1 class="calorie" id="remaining-carbs-value"></h1>
+
+                    <p class="calorie"> <span id="remaining-carbs-value">0</span></p>
                     <h1 class="gram-left-yellow-box">Carbs left</h1>
                 </div>
                 <div class="red-box-blur">
@@ -761,7 +829,8 @@
             </div>
             <div class="blue-fats">
                 <div class="yellow-text-box">
-                    <h1 class="calorie" id="remaining-fats-value"></h1>
+
+                    <p class="calorie"> <span id="remaining-fats-value">0</span></p>
                     <h1 class="gram-left-yellow-box">Fats left</h1>
                 </div>
                 <div class="blue-box-blur">
@@ -778,7 +847,7 @@
             </div>
         </div>
         <div class="food-items">
-           <img class="background-img-bg" src="./food/removed-bg/fruit/aardbij-removebg.png" alt="">
+            <img class="background-img-bg" src="./food/removed-bg/fruit/aardbij-removebg.png" alt="">
             <div class="breakfast-box">
                 <div class="process-box">
                     <div class="img-box">
@@ -790,7 +859,7 @@
                     <h1 class="breakfast-h1-left">0 / 601 kcal</h1>
                 </div>
                 <div class="add-button">
-                    <a href="./supermarket.html">
+                    <a href="#" id="add-me-button">
                         <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M15 28V15M15 2V15M15 15H2M15 15H28" stroke="white" stroke-width="3"
                                 stroke-linecap="round" />
@@ -810,7 +879,7 @@
                     <h1 class="breakfast-h1-left">0 / 601 kcal</h1>
                 </div>
                 <div class="add-button">
-                    <a href="./supermarket.html">
+                    <a href="#" id="add-me-button">
                         <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M15 28V15M15 2V15M15 15H2M15 15H28" stroke="white" stroke-width="3"
                                 stroke-linecap="round" />
@@ -830,7 +899,7 @@
                     <h1 class="breakfast-h1-left">0 / 501 kcal</h1>
                 </div>
                 <div class="add-button">
-                    <a href="./supermarket.html">
+                    <a href="#" id="add-me-button">
                         <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M15 28V15M15 2V15M15 15H2M15 15H28" stroke="white" stroke-width="3"
                                 stroke-linecap="round" />
@@ -839,7 +908,7 @@
 
                 </div>
             </div>
-            
+
             <div class="breakfast-box">
                 <div class="process-box">
                     <div class="img-box">
@@ -851,7 +920,7 @@
                     <h1 class="breakfast-h1-left">0 / 100 kcal</h1>
                 </div>
                 <div class="add-button">
-                    <a href="./supermarket.html">
+                    <a href="#" id="add-me-button">
                         <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M15 28V15M15 2V15M15 15H2M15 15H28" stroke="white" stroke-width="3"
                                 stroke-linecap="round" />
@@ -861,6 +930,7 @@
                 </div>
             </div>
         </div>
+
         <div class="recept-box">
             <div class="big-box">
                 <div class="recept-1">
@@ -918,30 +988,31 @@
             </div>
         </div>
     </div>
+
     <div class="bottom-navbar">
         <div class="menu">
-           <a class="menu-icon-a" href="./food-items.html">
-            <svg  width="15" height="22" viewBox="0 0 15 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path
-                    d="M10.092 19.3333C10.092 20.0697 10.6958 20.6667 11.4406 20.6667C12.1855 20.6667 12.7893 20.0697 12.7893 19.3333C12.7893 18.597 12.1855 18 11.4406 18C10.6958 18 10.092 18.597 10.092 19.3333Z"
-                    stroke="white" stroke-width="2.67" stroke-linecap="round" stroke-linejoin="round" />
-                <path
-                    d="M2 19.3333C2 20.0697 2.60382 20.6667 3.34866 20.6667C4.0935 20.6667 4.69732 20.0697 4.69732 19.3333C4.69732 18.597 4.0935 18 3.34866 18C2.60382 18 2 18.597 2 19.3333Z"
-                    stroke="white" stroke-width="2.67" stroke-linecap="round" stroke-linejoin="round" />
-                <path
-                    d="M10.092 11.3333C10.092 12.0697 10.6958 12.6667 11.4406 12.6667C12.1855 12.6667 12.7893 12.0697 12.7893 11.3333C12.7893 10.597 12.1855 10 11.4406 10C10.6958 10 10.092 10.597 10.092 11.3333Z"
-                    stroke="white" stroke-width="2.67" stroke-linecap="round" stroke-linejoin="round" />
-                <path
-                    d="M2 11.3333C2 12.0697 2.60382 12.6667 3.34866 12.6667C4.0935 12.6667 4.69732 12.0697 4.69732 11.3333C4.69732 10.597 4.0935 10 3.34866 10C2.60382 10 2 10.597 2 11.3333Z"
-                    stroke="white" stroke-width="2.67" stroke-linecap="round" stroke-linejoin="round" />
-                <path
-                    d="M10.092 3.33333C10.092 4.06971 10.6958 4.66667 11.4406 4.66667C12.1855 4.66667 12.7893 4.06971 12.7893 3.33333C12.7893 2.59695 12.1855 2 11.4406 2C10.6958 2 10.092 2.59695 10.092 3.33333Z"
-                    stroke="white" stroke-width="2.67" stroke-linecap="round" stroke-linejoin="round" />
-                <path
-                    d="M2 3.33333C2 4.06971 2.60382 4.66667 3.34866 4.66667C4.0935 4.66667 4.69732 4.06971 4.69732 3.33333C4.69732 2.59695 4.0935 2 3.34866 2C2.60382 2 2 2.59695 2 3.33333Z"
-                    stroke="white" stroke-width="2.67" stroke-linecap="round" stroke-linejoin="round" />
-            </svg>
-           </a>
+            <a class="menu-icon-a" href="./food-items.html">
+                <svg width="15" height="22" viewBox="0 0 15 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M10.092 19.3333C10.092 20.0697 10.6958 20.6667 11.4406 20.6667C12.1855 20.6667 12.7893 20.0697 12.7893 19.3333C12.7893 18.597 12.1855 18 11.4406 18C10.6958 18 10.092 18.597 10.092 19.3333Z"
+                        stroke="white" stroke-width="2.67" stroke-linecap="round" stroke-linejoin="round" />
+                    <path
+                        d="M2 19.3333C2 20.0697 2.60382 20.6667 3.34866 20.6667C4.0935 20.6667 4.69732 20.0697 4.69732 19.3333C4.69732 18.597 4.0935 18 3.34866 18C2.60382 18 2 18.597 2 19.3333Z"
+                        stroke="white" stroke-width="2.67" stroke-linecap="round" stroke-linejoin="round" />
+                    <path
+                        d="M10.092 11.3333C10.092 12.0697 10.6958 12.6667 11.4406 12.6667C12.1855 12.6667 12.7893 12.0697 12.7893 11.3333C12.7893 10.597 12.1855 10 11.4406 10C10.6958 10 10.092 10.597 10.092 11.3333Z"
+                        stroke="white" stroke-width="2.67" stroke-linecap="round" stroke-linejoin="round" />
+                    <path
+                        d="M2 11.3333C2 12.0697 2.60382 12.6667 3.34866 12.6667C4.0935 12.6667 4.69732 12.0697 4.69732 11.3333C4.69732 10.597 4.0935 10 3.34866 10C2.60382 10 2 10.597 2 11.3333Z"
+                        stroke="white" stroke-width="2.67" stroke-linecap="round" stroke-linejoin="round" />
+                    <path
+                        d="M10.092 3.33333C10.092 4.06971 10.6958 4.66667 11.4406 4.66667C12.1855 4.66667 12.7893 4.06971 12.7893 3.33333C12.7893 2.59695 12.1855 2 11.4406 2C10.6958 2 10.092 2.59695 10.092 3.33333Z"
+                        stroke="white" stroke-width="2.67" stroke-linecap="round" stroke-linejoin="round" />
+                    <path
+                        d="M2 3.33333C2 4.06971 2.60382 4.66667 3.34866 4.66667C4.0935 4.66667 4.69732 4.06971 4.69732 3.33333C4.69732 2.59695 4.0935 2 3.34866 2C2.60382 2 2 2.59695 2 3.33333Z"
+                        stroke="white" stroke-width="2.67" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+            </a>
 
         </div>
         <div class="menu">
@@ -992,126 +1063,125 @@
         });
     });
 </script>
+
 <script>
-    // Get the query parameters from the URL
-    const protein = parseInt(urlParams.get('protein'));
-    const carbs = parseInt(urlParams.get('carbs'));
-    const fats = parseInt(urlParams.get('fats'));
-    const sugar = parseInt(urlParams.get('sugar'));
-    const fiber = parseInt(urlParams.get('fiber'));
-    const salt = parseInt(urlParams.get('salt'));
+      
+         
 
-    // Display the results on the page
-    document.getElementById('calories').textContent = targetCalories;
-    document.getElementById('protein').textContent = protein;
-    document.getElementById('carbs').textContent = carbs;
-    document.getElementById('fats').textContent = fats;
-    document.getElementById('sugar').textContent = sugar;
-    document.getElementById('fiber').textContent = fiber;
-    document.getElementById('salt').textContent = salt;
+    const urlParams = new URLSearchParams(window.location.search);
+    const targetCalories = parseInt(urlParams.get('calories')) || 0;
+    const targetProtein = parseInt(urlParams.get('protein')) || 0;
+    const targetCarbs = parseInt(urlParams.get('carbs')) || 0;
+    const targetFats = parseInt(urlParams.get('fats')) || 0;
 
-    // Variables to track the food items and calories consumed
-    let foodItems = [];
+    let totalCaloriesConsumed = 0;
+    let totalProteinConsumed = 0;
+    let totalCarbsConsumed = 0;
+    let totalFatsConsumed = 0;
 
-    // Function to add a food item
-    function addFoodItem() {
-        const foodName = document.getElementById('food-name').value;
-        const foodCalories = parseInt(document.getElementById('food-calories').value);
+    // Update remaining values
+    function updateRemainingValues() {
+        document.getElementById('remaining-calories-value').textContent = Math.max(targetCalories - totalCaloriesConsumed, 0);
+        document.getElementById('remaining-protein-value').textContent = Math.max(targetProtein - totalProteinConsumed, 0);
+        document.getElementById('remaining-carbs-value').textContent = Math.max(targetCarbs - totalCarbsConsumed, 0);
+        document.getElementById('remaining-fats-value').textContent = Math.max(targetFats - totalFatsConsumed, 0);
+    }
 
-        if (!foodName || isNaN(foodCalories)) {
-            alert("Please provide both food name and calories.");
-            return;
-        }
-
-        foodItems.push({ name: foodName, calories: foodCalories });
+    // Add selected food item
+    function addFoodItem(foodName, foodCalories, foodProtein, foodCarbs, foodFats) {
         totalCaloriesConsumed += foodCalories;
+        totalProteinConsumed += foodProtein;
+        totalCarbsConsumed += foodCarbs;
+        totalFatsConsumed += foodFats;
 
-        // Update the food list
-        const foodList = document.getElementById('food-list');
-        const listItem = document.createElement('li');
-        listItem.textContent = `${foodName} - ${foodCalories} kcal`;
-        foodList.appendChild(listItem);
+        const addedFoodList = document.getElementById('added-food-list');
+        const listItem = document.createElement('h5');
+        listItem.textContent = `${foodName} - Calories: ${foodCalories}, Protein: ${foodProtein}g, Carbs: ${foodCarbs}g, Fats: ${foodFats}g`;
 
-        // Update the remaining calories
-        let remainingCalories = targetCalories - totalCaloriesConsumed;
+        const removeButton = document.createElement('button');
+        removeButton.textContent = 'Remove';
+        removeButton.classList.add('remove-btn');
+        removeButton.onclick = () => removeFoodItem(listItem, foodCalories, foodProtein, foodCarbs, foodFats);
 
-        // Prevent negative calories and show "Succeed" message if calories hit 0
-        if (remainingCalories <= 0) {
-            remainingCalories = 0;  // Set remaining calories to 0 if we exceed the target
-            document.getElementById('remaining-calories-value').textContent = "Succeed! You’ve hit your calorie target!";
-            document.getElementById('remaining-calories-value').style.color = "white";
-        } else {
-            document.getElementById('remaining-calories-value').textContent = remainingCalories;
-            document.getElementById('remaining-calories-value').style.color = "black";
+        listItem.appendChild(removeButton);
+        addedFoodList.appendChild(listItem);
+
+        updateRemainingValues();
+        saveFoodItems();
+    }
+
+    // Remove selected food item
+    function removeFoodItem(item, foodCalories, foodProtein, foodCarbs, foodFats) {
+        totalCaloriesConsumed -= foodCalories;
+        totalProteinConsumed -= foodProtein;
+        totalCarbsConsumed -= foodCarbs;
+        totalFatsConsumed -= foodFats;
+
+        item.remove();
+        updateRemainingValues();
+        saveFoodItems();
+    }
+
+    // Save food items to localStorage
+    function saveFoodItems() {
+        const foodItems = [];
+        const foodListItems = document.getElementById('added-food-list').children;
+        for (let i = 0; i < foodListItems.length; i++) {
+            const item = foodListItems[i];
+            const foodName = item.textContent.split(' - ')[0];
+            const foodCalories = parseInt(item.textContent.split(' - ')[1].split(' ')[1]);
+            const foodProtein = parseInt(item.textContent.split('Protein: ')[1].split('g')[0]);
+            const foodCarbs = parseInt(item.textContent.split('Carbs: ')[1].split('g')[0]);
+            const foodFats = parseInt(item.textContent.split('Fats: ')[1].split('g')[0]);
+
+            foodItems.push({ foodName, foodCalories, foodProtein, foodCarbs, foodFats });
         }
 
-        // Update the donut chart based on calories consumed
-        const percentage = (totalCaloriesConsumed / targetCalories) * 100;
-        document.getElementById('calories-donut').style.background = `conic-gradient(#4caf50 ${percentage}% , #e1e1e1 ${percentage}% 100%)`;
+        localStorage.setItem('foodItems', JSON.stringify(foodItems));
     }
 
-    
-</script>
-<script>
-    // Get the query parameters from the URL
-const urlParams = new URLSearchParams(window.location.search);
-const targetCalories = parseInt(urlParams.get('calories')) || 0;
-const targetFat = parseInt(urlParams.get('fats')) || 0;
-const targetProtein = parseInt(urlParams.get('protein')) || 0;
-const targetCarbs = parseInt(urlParams.get('carbs')) || 0;
-
-// Initialize consumed values
-let totalCaloriesConsumed = 0;
-let totalFatConsumed = 0;
-let totalProteinConsumed = 0;
-let totalCarbsConsumed = 0;
-
-// Function to update the remaining values dynamically
-function updateRemainingValues() {
-    // Calculate remaining values
-    const remainingCalories = Math.max(targetCalories - totalCaloriesConsumed, 0);
-    const remainingFat = Math.max(targetFat - totalFatConsumed, 0);
-    const remainingProtein = Math.max(targetProtein - totalProteinConsumed, 0);
-    const remainingCarbs = Math.max(targetCarbs - totalCarbsConsumed, 0);
-
-    // Update each box with the calculated values
-    updateBox('remaining-calories-value', remainingCalories, "Succeed!");
-    updateBox('remaining-fats-value', remainingFat, "Succeed!");
-    updateBox('remaining-protein-value', remainingProtein, " Succeed!");
-    updateBox('remaining-carbs-value', remainingCarbs, "Succeed!");
-}
-
-// Helper function to update a specific box
-function updateBox(elementId, value, successMessage) {
-    const element = document.getElementById(elementId);
-    if (value === 0) {
-        element.textContent = successMessage;
-        element.style.color = "white"; // Success color
-        element.style.fontSize = "20px"; // Change font size for success message
-    } else {
-        element.textContent = value;
-        element.style.color = ""; // Default color
-        element.style.fontSize = ""; // Reset font size to default
+    // Load food items from localStorage
+    function loadFoodItems() {
+        const savedFoodItems = JSON.parse(localStorage.getItem('foodItems')) || [];
+        savedFoodItems.forEach(item => {
+            addFoodItem(item.foodName, item.foodCalories, item.foodProtein, item.foodCarbs, item.foodFats);
+        });
     }
-}
+
+    // Show the modal
+    // Make "add-me-button" open the food modal
+    document.getElementById('add-me-button').addEventListener('click', (event) => {
+        event.preventDefault(); // Prevents the link from navigating
+        document.getElementById('food-modal').style.display = 'flex';
+    });
 
 
-// Example: Add food and update all values
-function addFood(foodCalories, foodFat, foodProtein, foodCarbs) {
-    totalCaloriesConsumed += foodCalories;
-    totalFatConsumed += foodFat;
-    totalProteinConsumed += foodProtein;
-    totalCarbsConsumed += foodCarbs;
+    // Close the modal
+    document.getElementById('close-modal').addEventListener('click', () => {
+        document.getElementById('food-modal').style.display = 'none';
+    });
 
+    // Add food when clicked in the modal
+    document.getElementById('food-list').addEventListener('click', (event) => {
+        if (event.target.tagName === 'LI') {
+            const foodName = event.target.getAttribute('data-food');
+            const foodCalories = parseInt(event.target.getAttribute('data-calories'));
+            const foodProtein = parseInt(event.target.getAttribute('data-protein'));
+            const foodCarbs = parseInt(event.target.getAttribute('data-carbs'));
+            const foodFats = parseInt(event.target.getAttribute('data-fats'));
+
+            addFoodItem(foodName, foodCalories, foodProtein, foodCarbs, foodFats);
+            document.getElementById('food-modal').style.display = 'none';
+        }
+    });
+
+    // Load saved food items on page load
+    window.onload = loadFoodItems;
+
+    // Initial update of remaining values
     updateRemainingValues();
-}
-
-// Initial update when the page loads
-updateRemainingValues();
-
 </script>
-
-<script>
+<script days>
     const daysContainer = document.getElementById('daysCount');
     const weekdays = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
 
