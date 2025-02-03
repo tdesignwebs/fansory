@@ -23,7 +23,8 @@
         @media (max-width: 440px) {
             .container {
                 width: 100%;
-                height: 200vh;
+                height: fit-content;
+                margin-bottom: 50px;
                 display: flex;
                 flex-direction: column;
                 align-items: center;
@@ -669,6 +670,7 @@
                 padding: 0;
             }
 
+
             #food-list li {
                 margin: 10px 0;
                 cursor: pointer;
@@ -682,14 +684,104 @@
             .add-food-btn {
                 margin-top: 20px;
             }
+
             #added-food-list h1 {
-            color: white;
-        }
-        h5{
-            color: white;
-            font-weight: normal;
-            font-family: sans-serif;
-        }
+                color: white;
+            }
+
+            #added-food-list {
+                display: flex;
+                width: 90%;
+                flex-direction: column;
+                position: relative;
+                gap: 10px;
+                padding: 0;
+            }
+
+            h5 {
+                color: white;
+                width: 50%;
+                display: flex;
+                font-size: 16px;
+                align-items: center;
+                justify-content: center;
+                font-weight: normal;
+                font-family: sans-serif;
+
+            }
+            .food-info{
+                width: 60%;
+                height: 55px;
+                align-items: center;
+                
+       
+
+            }
+
+            h3 {
+                color: rgba(255, 255, 255, 0);
+                width: 1px;
+                display: none;
+                font-size: 1.5px;
+                font-weight: normal;
+                font-family: sans-serif;
+
+            }
+
+            .food-calories {
+                color: rgba(255, 255, 255, 0.6);
+                font-weight: bold;
+                font-size: 15px;
+                height: 30px;
+                display: flex;
+                align-items: flex-start;
+                font-family: sans-serif,Arial;
+                
+            }
+
+            .food-name {
+                color: rgba(255, 255, 255, 1);
+                font-weight: bold;
+                font-size: 20px;
+                height: 30px;
+                display: flex;
+                align-items: center;
+                font-family: sans-serif,Arial;
+            }
+
+            .food-details {
+                display: none;
+            }
+
+            .food-item {
+                height: 50px;
+                display: flex;
+                justify-content: space-between;
+                padding: 1em;
+                align-items: center;
+                background: rgba(34, 47, 75, 0.2);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                border-radius: 10px;
+            }
+
+            .remove-btn {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                width: 50px;
+                height: 50px;
+                border-radius: 10px;
+                background-color: rgb(255, 0, 0);
+                border: 1px solid rgba(255, 255, 255, 0.04);
+            }
+
+            .food-img {
+                border-radius: 5px;
+                width: 60px;
+                height: 60px;
+            }
+
         }
     </style>
 </head>
@@ -751,12 +843,13 @@
             </div>
         </div>
         <div class="days-count" id="daysCount"></div>
-   
+        <ul id="added-food-list"></ul>
         <div id="food-modal">
             <div id="modal-content">
                 <h2>Select Food</h2>
                 <ul id="food-list">
-                    <li data-food="Hamburger" data-calories="250" data-protein="12" data-carbs="30" data-fats="10">
+                    <li data-food="bigmac" data-img="./food/hamburger/bigmac.png" data-calories="250" data-protein="12"
+                        data-carbs="30" data-fats="10">
                         Hamburger</li>
                     <li data-food="Apple" data-calories="95" data-protein="0" data-carbs="25" data-fats="0">Apple</li>
                     <li data-food="Banana" data-calories="105" data-protein="1" data-carbs="27" data-fats="0">Banana
@@ -765,7 +858,7 @@
                 <button id="close-modal">Close</button>
             </div>
         </div>
-        <ul id="added-food-list"></ul>
+
         <div class="main-box">
             <div class="calorie-box">
                 <div class="text-box">
@@ -987,6 +1080,7 @@
                 </div>
             </div>
         </div>
+
     </div>
 
     <div class="bottom-navbar">
@@ -1065,9 +1159,6 @@
 </script>
 
 <script>
-      
-         
-
     const urlParams = new URLSearchParams(window.location.search);
     const targetCalories = parseInt(urlParams.get('calories')) || 0;
     const targetProtein = parseInt(urlParams.get('protein')) || 0;
@@ -1079,7 +1170,6 @@
     let totalCarbsConsumed = 0;
     let totalFatsConsumed = 0;
 
-    // Update remaining values
     function updateRemainingValues() {
         document.getElementById('remaining-calories-value').textContent = Math.max(targetCalories - totalCaloriesConsumed, 0);
         document.getElementById('remaining-protein-value').textContent = Math.max(targetProtein - totalProteinConsumed, 0);
@@ -1087,30 +1177,61 @@
         document.getElementById('remaining-fats-value').textContent = Math.max(targetFats - totalFatsConsumed, 0);
     }
 
-    // Add selected food item
-    function addFoodItem(foodName, foodCalories, foodProtein, foodCarbs, foodFats) {
+    function addFoodItem(foodName, foodImg, foodCalories, foodProtein, foodCarbs, foodFats) {
         totalCaloriesConsumed += foodCalories;
         totalProteinConsumed += foodProtein;
         totalCarbsConsumed += foodCarbs;
         totalFatsConsumed += foodFats;
 
         const addedFoodList = document.getElementById('added-food-list');
-        const listItem = document.createElement('h5');
-        listItem.textContent = `${foodName} - Calories: ${foodCalories}, Protein: ${foodProtein}g, Carbs: ${foodCarbs}g, Fats: ${foodFats}g`;
+        const listItem = document.createElement('div');
+        listItem.classList.add('food-item');
 
-        const removeButton = document.createElement('button');
-        removeButton.textContent = 'Remove';
-        removeButton.classList.add('remove-btn');
+        // Wrap foodName and foodCalories in a single container
+        listItem.innerHTML = `
+            <img src="${foodImg}" alt="${foodName}" class="food-img" />
+            <div class="food-info">
+                <div class="food-name">${foodName}</div>
+                <div class="food-calories">${foodCalories} kcal</div>
+            </div>
+            <div class="food-details">
+                <h3>Protein: ${foodProtein}g, Carbs: ${foodCarbs}g, Fats: ${foodFats}g</h3>
+            </div>
+            <button class="remove-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="50" height="50" viewBox="0,0,256,256" style="fill:#FFFFFF;">
+                    <g fill="#ffffff" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal">
+                        <g transform="scale(10.66667,10.66667)">
+                            <path d="M10,2l-1,1h-4c-0.552,0 -1,0.448 -1,1c0,0.552 0.448,1 1,1h2h10h2c0.552,0 1,-0.448 1,-1c0,-0.552 -0.448,-1 -1,-1h-4l-1,-1zM5,7v13c0,1.105 0.895,2 2,2h10c1.105,0 2,-0.895 2,-2v-13z"></path>
+                        </g>
+                    </g>
+                </svg>
+            </button>
+        `;
+
+        const removeButton = listItem.querySelector('.remove-btn');
         removeButton.onclick = () => removeFoodItem(listItem, foodCalories, foodProtein, foodCarbs, foodFats);
 
-        listItem.appendChild(removeButton);
         addedFoodList.appendChild(listItem);
-
         updateRemainingValues();
         saveFoodItems();
     }
 
-    // Remove selected food item
+    function loadFoodItems() {
+        const savedFoodItems = JSON.parse(localStorage.getItem('foodItems')) || [];
+        savedFoodItems.forEach(item => {
+            addFoodItem(item.foodName, item.foodImg, item.foodCalories, item.foodProtein, item.foodCarbs, item.foodFats);
+        });
+    }
+
+    document.getElementById('add-me-button').addEventListener('click', (event) => {
+        event.preventDefault();
+        document.getElementById('food-modal').style.display = 'flex';
+    });
+
+    document.getElementById('close-modal').addEventListener('click', () => {
+        document.getElementById('food-modal').style.display = 'none';
+    });
+
     function removeFoodItem(item, foodCalories, foodProtein, foodCarbs, foodFats) {
         totalCaloriesConsumed -= foodCalories;
         totalProteinConsumed -= foodProtein;
@@ -1122,65 +1243,43 @@
         saveFoodItems();
     }
 
-    // Save food items to localStorage
     function saveFoodItems() {
         const foodItems = [];
         const foodListItems = document.getElementById('added-food-list').children;
         for (let i = 0; i < foodListItems.length; i++) {
             const item = foodListItems[i];
-            const foodName = item.textContent.split(' - ')[0];
-            const foodCalories = parseInt(item.textContent.split(' - ')[1].split(' ')[1]);
-            const foodProtein = parseInt(item.textContent.split('Protein: ')[1].split('g')[0]);
-            const foodCarbs = parseInt(item.textContent.split('Carbs: ')[1].split('g')[0]);
-            const foodFats = parseInt(item.textContent.split('Fats: ')[1].split('g')[0]);
+            const foodName = item.querySelector('.food-name').textContent;
+            const foodImg = item.querySelector('img').src;
+            const foodCalories = parseInt(item.querySelector('.food-calories').textContent.split(' ')[0]);
+            const foodProtein = parseInt(item.querySelector('h3').textContent.split('Protein: ')[1].split('g')[0]);
+            const foodCarbs = parseInt(item.querySelector('h3').textContent.split('Carbs: ')[1].split('g')[0]);
+            const foodFats = parseInt(item.querySelector('h3').textContent.split('Fats: ')[1].split('g')[0]);
 
-            foodItems.push({ foodName, foodCalories, foodProtein, foodCarbs, foodFats });
+            foodItems.push({ foodName, foodImg, foodCalories, foodProtein, foodCarbs, foodFats });
         }
-
         localStorage.setItem('foodItems', JSON.stringify(foodItems));
     }
 
-    // Load food items from localStorage
-    function loadFoodItems() {
-        const savedFoodItems = JSON.parse(localStorage.getItem('foodItems')) || [];
-        savedFoodItems.forEach(item => {
-            addFoodItem(item.foodName, item.foodCalories, item.foodProtein, item.foodCarbs, item.foodFats);
-        });
-    }
-
-    // Show the modal
-    // Make "add-me-button" open the food modal
-    document.getElementById('add-me-button').addEventListener('click', (event) => {
-        event.preventDefault(); // Prevents the link from navigating
-        document.getElementById('food-modal').style.display = 'flex';
-    });
-
-
-    // Close the modal
-    document.getElementById('close-modal').addEventListener('click', () => {
-        document.getElementById('food-modal').style.display = 'none';
-    });
-
-    // Add food when clicked in the modal
     document.getElementById('food-list').addEventListener('click', (event) => {
         if (event.target.tagName === 'LI') {
             const foodName = event.target.getAttribute('data-food');
+            const foodImg = event.target.getAttribute('data-img');
             const foodCalories = parseInt(event.target.getAttribute('data-calories'));
             const foodProtein = parseInt(event.target.getAttribute('data-protein'));
             const foodCarbs = parseInt(event.target.getAttribute('data-carbs'));
             const foodFats = parseInt(event.target.getAttribute('data-fats'));
 
-            addFoodItem(foodName, foodCalories, foodProtein, foodCarbs, foodFats);
+            addFoodItem(foodName, foodImg, foodCalories, foodProtein, foodCarbs, foodFats);
             document.getElementById('food-modal').style.display = 'none';
         }
     });
 
-    // Load saved food items on page load
     window.onload = loadFoodItems;
-
-    // Initial update of remaining values
     updateRemainingValues();
 </script>
+
+
+
 <script days>
     const daysContainer = document.getElementById('daysCount');
     const weekdays = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
