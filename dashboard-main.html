@@ -24,7 +24,7 @@
             .container {
                 width: 100%;
                 height: fit-content;
-                margin-bottom: 50px;
+                margin-bottom: 60px;
                 display: flex;
                 flex-direction: column;
                 align-items: center;
@@ -657,8 +657,8 @@
                 align-items: center;
             }
 
-            #modal-content {
-                background-color: white;
+            .modal-content {
+                background: linear-gradient(-5deg, #1A1C21, #101318);
                 padding: 20px;
                 height: 100%;
                 border-radius: 8px;
@@ -667,18 +667,17 @@
 
             #food-list {
                 list-style-type: none;
+                display: flex;
+                justify-content: center;
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
                 padding: 0;
             }
 
 
-            #food-list li {
-                margin: 10px 0;
-                cursor: pointer;
-            }
 
-            #food-list li:hover {
-                background-color: #f0f0f0;
-            }
+
 
             /* Style for the Add Food button */
             .add-food-btn {
@@ -709,12 +708,27 @@
                 font-family: sans-serif;
 
             }
-            .food-info{
+
+            .food-info {
                 width: 60%;
                 height: 55px;
                 align-items: center;
-                
-       
+
+
+
+            }
+
+            li {
+                position: relative;
+                overflow: hidden;
+                width: 326px;
+                background: rgba(255, 255, 255, 0.1);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                box-shadow: inset 0px 1px 0px rgba(255, 255, 255, 0.08);
+                border-radius: 20px;
+                height: 140px;
+                flex-direction: column;
+                display: flex;
 
             }
 
@@ -730,23 +744,25 @@
 
             .food-calories {
                 color: rgba(255, 255, 255, 0.6);
-                font-weight: bold;
-                font-size: 15px;
+                font-weight: lighter;
+                font-size: 14px;
                 height: 30px;
                 display: flex;
                 align-items: flex-start;
-                font-family: sans-serif,Arial;
-                
+                font-family: sans-serif, Arial;
+
             }
 
             .food-name {
                 color: rgba(255, 255, 255, 1);
                 font-weight: bold;
-                font-size: 20px;
+                font-size: 18px;
+                width: 110px;
                 height: 30px;
                 display: flex;
                 align-items: center;
-                font-family: sans-serif,Arial;
+                justify-content: space-between;
+                font-family: sans-serif, Arial;
             }
 
             .food-details {
@@ -778,10 +794,168 @@
 
             .food-img {
                 border-radius: 5px;
-                width: 60px;
-                height: 60px;
+                width: 50px;
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                height: 50px;
             }
 
+            .up-side-container {
+                width: 100%;
+                height: 70px;
+                display: flex;
+                align-items: center;
+                justify-content: space-around;
+                z-index: 1;
+                background-color: rgba(255, 255, 255, 0);
+            }
+
+            .down-side-container {
+                width: 100%;
+                height: 70px;
+                display: flex;
+                align-items: center;
+                justify-content: space-evenly;
+                z-index: 1;
+                background-color: rgba(255, 255, 255, 0);
+            }
+
+            .img-txt {
+                display: flex;
+                width: 230px;
+                margin: 10px 0 0 0;
+                align-items: center;
+                gap: 10px;
+            }
+
+            .add-btn {
+                background-color: transparent;
+                border: none;
+                padding: 8px;
+                border-radius: 50%;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .add-btn svg {
+                width: 25px;
+                height: 25px;
+                fill: none;
+                stroke: white;
+                stroke-width: 3;
+                stroke-linecap: round;
+                pointer-events: none;
+                /* Prevents the SVG from blocking clicks */
+            }
+
+            h2 {
+                color: rgba(255, 255, 255, 0.6);
+                font-size: 15px;
+                font-family: sans-serif;
+                font-weight: lighter;
+            }
+
+            .info-down {
+                height: 46px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                width: 182px;
+                z-index: 1;
+                background-color: rgba(255, 255, 255, 0);
+            }
+
+            .name-box-1 {
+                width: 50px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-direction: column;
+                z-index: 1;
+                height: 46px;
+            }
+
+            .carbs {
+                width: 100%;
+                height: 23px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+                z-index: 1;
+                background-color: rgba(67, 4, 4, 0);
+            }
+
+            .grams {
+                color: rgba(255, 255, 255, 0.6);
+                font-size: 15px;
+                font-family: sans-serif;
+                font-weight: lighter;
+                z-index: 1;
+            }
+
+            .left {
+                width: 100%;
+                height: 23px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                z-index: 1;
+                text-align: center;
+                background-color: rgba(67, 4, 4, 0);
+            }
+
+            .Carbs-left {
+                color: rgba(255, 255, 255, 0.6);
+                font-size: 15px;
+                font-family: sans-serif;
+                font-weight: lighter;
+                z-index: 1;
+            }
+
+            .search-box {
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                height: 50px;
+                border-radius: 50px;
+                background: rgba(255, 255, 255, 0.2);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                box-shadow: inset 0px 1px 0px rgba(255, 255, 255, 0.08);
+            }
+
+            input:focus {
+                border: 2px solid transparent;
+                /* Keeps the transparent border */
+                outline: 2px solid rgba(0, 0, 255, 0);
+                /* Custom blue outline on focus */
+            }
+
+            input {
+                border: 2px solid #ff583300;
+                border-radius: 8px;
+                width: 90%;
+                height: 100%;
+                background: transparent;
+                color: white;
+                padding: 0 15px;
+                border-radius: 50px;
+            }
+            .close-modal{
+                background-color: transparent;
+                border: none;
+                color: white;
+                width: 40px;
+                font-size: 20px;
+                height: 50px;
+            }
+
+            .food-container{
+                display: flex;
+                gap: 10px;
+            }
         }
     </style>
 </head>
@@ -843,21 +1017,80 @@
             </div>
         </div>
         <div class="days-count" id="daysCount"></div>
-        <ul id="added-food-list"></ul>
-        <div id="food-modal">
-            <div id="modal-content">
-                <h2>Select Food</h2>
-                <ul id="food-list">
-                    <li data-food="bigmac" data-img="./food/hamburger/bigmac.png" data-calories="250" data-protein="12"
-                        data-carbs="30" data-fats="10">
-                        Hamburger</li>
-                    <li data-food="Apple" data-calories="95" data-protein="0" data-carbs="25" data-fats="0">Apple</li>
-                    <li data-food="Banana" data-calories="105" data-protein="1" data-carbs="27" data-fats="0">Banana
-                    </li>
-                </ul>
-                <button id="close-modal">Close</button>
+      
+        <div id="food-modal"class="modal">
+            <div class="modal-content">
+                <div class="navbar" style="width: 100%;">
+                    <div class="icon-logo">
+                        <svg width="51" height="47" viewBox="0 0 51 47" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <g filter="url(#filter0_ii_147_65)">
+                                <path
+                                    d="M26.5714 12.0095C22 1.57742 6 2.68853 6 16.0219C6 29.3553 26.5714 40.4668 26.5714 40.4668C26.5714 40.4668 47.1429 29.3553 47.1429 16.0219C47.1429 2.68853 31.1429 1.57742 26.5714 12.0095Z"
+                                    fill="black"></path>
+                            </g>
+                            <g filter="url(#filter1_f_147_65)">
+                                <path
+                                    d="M25.5428 15.3362C22.1143 7.39447 10.1143 8.24034 10.1143 18.3907C10.1143 28.5411 25.5428 37 25.5428 37C25.5428 37 40.9714 28.5411 40.9714 18.3907C40.9714 8.24034 28.9714 7.39447 25.5428 15.3362Z"
+                                    fill="#FF0037" fill-opacity="0.7"></path>
+                            </g>
+                            <defs>
+                                <filter id="filter0_ii_147_65" x="6" y="5" width="41.1428" height="35.4668"
+                                    filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                    <feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood>
+                                    <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape">
+                                    </feBlend>
+                                    <feColorMatrix in="SourceAlpha" type="matrix"
+                                        values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha">
+                                    </feColorMatrix>
+                                    <feOffset></feOffset>
+                                    <feGaussianBlur stdDeviation="15"></feGaussianBlur>
+                                    <feComposite in2="hardAlpha" operator="arithmetic" k2="-1" k3="1"></feComposite>
+                                    <feColorMatrix type="matrix"
+                                        values="0 0 0 0 1 0 0 0 0 0 0 0 0 0 0.216667 0 0 0 0.5 0"></feColorMatrix>
+                                    <feBlend mode="normal" in2="shape" result="effect1_innerShadow_147_65"></feBlend>
+                                    <feColorMatrix in="SourceAlpha" type="matrix"
+                                        values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha">
+                                    </feColorMatrix>
+                                    <feOffset></feOffset>
+                                    <feGaussianBlur stdDeviation="15"></feGaussianBlur>
+                                    <feComposite in2="hardAlpha" operator="arithmetic" k2="-1" k3="1"></feComposite>
+                                    <feColorMatrix type="matrix"
+                                        values="0 0 0 0 1 0 0 0 0 0 0 0 0 0 0.216667 0 0 0 0.5 0"></feColorMatrix>
+                                    <feBlend mode="normal" in2="effect1_innerShadow_147_65"
+                                        result="effect2_innerShadow_147_65"></feBlend>
+                                </filter>
+                                <filter id="filter1_f_147_65" x="0.114258" y="0" width="50.8572" height="47"
+                                    filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                    <feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood>
+                                    <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape">
+                                    </feBlend>
+                                    <feGaussianBlur stdDeviation="5" result="effect1_foregroundBlur_147_65">
+                                    </feGaussianBlur>
+                                </filter>
+                            </defs>
+                        </svg>
+                        <h1 class="Fansory">Fansory</h1>
+
+                    </div>
+                    <div class="favorite">
+                       <button id="close-modal" class="close-modal">X</button>
+
+                    </div>
+                </div>
+                <div class="search-box">
+                    <input type="text" id="search-input" placeholder="Search food...">
+                    <svg style="margin: 0 20px 0 0 ;" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M19.6 21L13.3 14.7C12.8 15.1 12.225 15.4167 11.575 15.65C10.925 15.8833 10.2333 16 9.5 16C7.68333 16 6.14583 15.3708 4.8875 14.1125C3.62917 12.8542 3 11.3167 3 9.5C3 7.68333 3.62917 6.14583 4.8875 4.8875C6.14583 3.62917 7.68333 3 9.5 3C11.3167 3 12.8542 3.62917 14.1125 4.8875C15.3708 6.14583 16 7.68333 16 9.5C16 10.2333 15.8833 10.925 15.65 11.575C15.4167 12.225 15.1 12.8 14.7 13.3L21 19.6L19.6 21ZM9.5 14C10.75 14 11.8125 13.5625 12.6875 12.6875C13.5625 11.8125 14 10.75 14 9.5C14 8.25 13.5625 7.1875 12.6875 6.3125C11.8125 5.4375 10.75 5 9.5 5C8.25 5 7.1875 5.4375 6.3125 6.3125C5.4375 7.1875 5 8.25 5 9.5C5 10.75 5.4375 11.8125 6.3125 12.6875C7.1875 13.5625 8.25 14 9.5 14Z"
+                            fill="white"></path>
+                    </svg>
+                </div>
+
+                <ul id="food-list"></ul>
             </div>
         </div>
+
 
         <div class="main-box">
             <div class="calorie-box">
@@ -1080,7 +1313,7 @@
                 </div>
             </div>
         </div>
-
+        <ul id="added-food-list"></ul>
     </div>
 
     <div class="bottom-navbar">
@@ -1147,6 +1380,7 @@
 
     </div>
 </body>
+<script src="https://kit.fontawesome.com/d203ef3333.js" crossorigin="anonymous"></script>
 <script>
     document.querySelectorAll('.nav-item').forEach(item => {
         item.addEventListener('click', function () {
@@ -1170,6 +1404,27 @@
     let totalCarbsConsumed = 0;
     let totalFatsConsumed = 0;
 
+    const foodItems = [
+        {
+            id: 1,
+            name: 'Big Mac',
+            img: './food/hamburger/bigmac.png',
+            kcal: 250,
+            carbs: 30,
+            protein: 12,
+            fats: 10
+        },
+        {
+            id: 2,
+            name: 'Ananas',
+            img: './food/fruit/ananas.png',
+            kcal: 62,
+            carbs: 13,
+            protein: 2,
+            fats: 0.4
+        }
+    ];
+
     function updateRemainingValues() {
         document.getElementById('remaining-calories-value').textContent = Math.max(targetCalories - totalCaloriesConsumed, 0);
         document.getElementById('remaining-protein-value').textContent = Math.max(targetProtein - totalProteinConsumed, 0);
@@ -1187,24 +1442,19 @@
         const listItem = document.createElement('div');
         listItem.classList.add('food-item');
 
-        // Wrap foodName and foodCalories in a single container
         listItem.innerHTML = `
-            <img src="${foodImg}" alt="${foodName}" class="food-img" />
-            <div class="food-info">
-                <div class="food-name">${foodName}</div>
-                <div class="food-calories">${foodCalories} kcal</div>
+            <div class="food-container">
+                <img src="${foodImg}" alt="${foodName}" class="food-img" />
+                <div class="food-info">
+                    <div class="food-name">${foodName}</div>
+                    <div class="food-calories">${foodCalories} kcal</div>
+                </div>
             </div>
             <div class="food-details">
                 <h3>Protein: ${foodProtein}g, Carbs: ${foodCarbs}g, Fats: ${foodFats}g</h3>
             </div>
             <button class="remove-btn">
-                <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="50" height="50" viewBox="0,0,256,256" style="fill:#FFFFFF;">
-                    <g fill="#ffffff" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal">
-                        <g transform="scale(10.66667,10.66667)">
-                            <path d="M10,2l-1,1h-4c-0.552,0 -1,0.448 -1,1c0,0.552 0.448,1 1,1h2h10h2c0.552,0 1,-0.448 1,-1c0,-0.552 -0.448,-1 -1,-1h-4l-1,-1zM5,7v13c0,1.105 0.895,2 2,2h10c1.105,0 2,-0.895 2,-2v-13z"></path>
-                        </g>
-                    </g>
-                </svg>
+               <img src="./close.svg" alt="Remove" class="remove-icon" />
             </button>
         `;
 
@@ -1222,15 +1472,21 @@
             addFoodItem(item.foodName, item.foodImg, item.foodCalories, item.foodProtein, item.foodCarbs, item.foodFats);
         });
     }
+    document.getElementById("search-input").addEventListener("input", function () {
+        const query = this.value.toLowerCase();
+        const foodItems = document.querySelectorAll("#food-list li");
 
-    document.getElementById('add-me-button').addEventListener('click', (event) => {
-        event.preventDefault();
-        document.getElementById('food-modal').style.display = 'flex';
+        foodItems.forEach(item => {
+            const name = item.getAttribute("data-food");
+            if (name.includes(query)) {
+                item.style.display = "block";
+            } else {
+                item.style.display = "none";
+            }
+        });
     });
 
-    document.getElementById('close-modal').addEventListener('click', () => {
-        document.getElementById('food-modal').style.display = 'none';
-    });
+
 
     function removeFoodItem(item, foodCalories, foodProtein, foodCarbs, foodFats) {
         totalCaloriesConsumed -= foodCalories;
@@ -1248,35 +1504,120 @@
         const foodListItems = document.getElementById('added-food-list').children;
         for (let i = 0; i < foodListItems.length; i++) {
             const item = foodListItems[i];
+
             const foodName = item.querySelector('.food-name').textContent;
-            const foodImg = item.querySelector('img').src;
             const foodCalories = parseInt(item.querySelector('.food-calories').textContent.split(' ')[0]);
-            const foodProtein = parseInt(item.querySelector('h3').textContent.split('Protein: ')[1].split('g')[0]);
-            const foodCarbs = parseInt(item.querySelector('h3').textContent.split('Carbs: ')[1].split('g')[0]);
-            const foodFats = parseInt(item.querySelector('h3').textContent.split('Fats: ')[1].split('g')[0]);
+            const foodImg = item.querySelector('img').src;
+            const detailsText = item.querySelector('.food-details h3').textContent;
+
+            const foodProtein = parseInt(detailsText.split('Protein: ')[1].split('g')[0]);
+            const foodCarbs = parseInt(detailsText.split('Carbs: ')[1].split('g')[0]);
+            const foodFats = parseInt(detailsText.split('Fats: ')[1].split('g')[0]);
 
             foodItems.push({ foodName, foodImg, foodCalories, foodProtein, foodCarbs, foodFats });
         }
         localStorage.setItem('foodItems', JSON.stringify(foodItems));
     }
 
+    function createFoodItemHTML(item) {
+        return `
+            <div class="up-side-container">
+                <div class="img-txt">
+                    <img src="${item.img}" alt="${item.name}" class="food-img" />
+                    <div class="food-info">
+                        <div class="food-name">${item.name} <h2>100g</h2></div>
+                        <div class="food-calories">${item.kcal} kcal</div>
+                    </div>
+                </div>
+                <button class="add-btn">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 22V12M12 2V12M12 12H2M12 12H22" stroke="white" stroke-width="3"
+                            stroke-linecap="round"></path>
+                    </svg>
+                </button>
+            </div>
+            <div class="down-side-container">
+                <div class="info-down">
+                    <div class="name-box-1">
+                        <div class="carbs"><h1 class="grams">${item.carbs}g</h1></div>
+                        <div class="left"><h1 class="Carbs-left">Carbs</h1></div>
+                    </div>
+                    <div class="name-box-1">
+                        <div class="carbs"><h1 class="grams">${item.protein}g</h1></div>
+                        <div class="left"><h1 class="Carbs-left">Protein</h1></div>
+                    </div>
+                    <div class="name-box-1">
+                        <div class="carbs"><h1 class="grams">${item.fats}g</h1></div>
+                        <div class="left"><h1 class="Carbs-left">Fats</h1></div>
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+
+    function loadFoodList() {
+        const ulElement = document.getElementById('food-list');
+        foodItems.forEach(item => {
+            const liElement = document.createElement("li");
+            liElement.setAttribute("id", `food-${item.id}`);
+            liElement.setAttribute("data-food", item.name.toLowerCase());
+            liElement.setAttribute("data-img", item.img);
+            liElement.setAttribute("data-calories", item.kcal);
+            liElement.setAttribute("data-protein", item.protein);
+            liElement.setAttribute("data-carbs", item.carbs);
+            liElement.setAttribute("data-fats", item.fats);
+            liElement.innerHTML = createFoodItemHTML(item);
+            ulElement.appendChild(liElement);
+        });
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+        const modal = document.getElementById("food-modal");
+        const openModalBtn = document.getElementById("add-me-button");
+        const closeModalBtn = document.getElementById("close-modal");
+
+        // Open the modal when clicking the button
+        openModalBtn.addEventListener("click", (event) => {
+            event.preventDefault();
+            modal.style.display = "flex"; // Show modal
+        });
+
+        // Close the modal when clicking the close button
+        closeModalBtn.addEventListener("click", () => {
+            modal.style.display = "none"; // Hide modal
+        });
+
+        // Close the modal when clicking outside the content box
+        window.addEventListener("click", (event) => {
+            if (event.target === modal) {
+                modal.style.display = "none";
+            }
+        });
+    });
+
     document.getElementById('food-list').addEventListener('click', (event) => {
-        if (event.target.tagName === 'LI') {
-            const foodName = event.target.getAttribute('data-food');
-            const foodImg = event.target.getAttribute('data-img');
-            const foodCalories = parseInt(event.target.getAttribute('data-calories'));
-            const foodProtein = parseInt(event.target.getAttribute('data-protein'));
-            const foodCarbs = parseInt(event.target.getAttribute('data-carbs'));
-            const foodFats = parseInt(event.target.getAttribute('data-fats'));
+        if (event.target.closest('.add-btn')) {
+            const foodItem = event.target.closest('li');
+            const foodName = foodItem.getAttribute('data-food');
+            const foodImg = foodItem.getAttribute('data-img');
+            const foodCalories = parseInt(foodItem.getAttribute('data-calories'));
+            const foodProtein = parseInt(foodItem.getAttribute('data-protein'));
+            const foodCarbs = parseInt(foodItem.getAttribute('data-carbs'));
+            const foodFats = parseInt(foodItem.getAttribute('data-fats'));
 
             addFoodItem(foodName, foodImg, foodCalories, foodProtein, foodCarbs, foodFats);
             document.getElementById('food-modal').style.display = 'none';
         }
     });
 
-    window.onload = loadFoodItems;
-    updateRemainingValues();
+    window.onload = () => {
+        loadFoodList();
+        loadFoodItems();
+        updateRemainingValues();
+    };
 </script>
+
 
 
 
@@ -1316,6 +1657,44 @@
     }
 
     generateDays();
+</script>
+<script>
+
+    // <![CDATA[  <-- For SVG support
+    if ('WebSocket' in window) {
+        (function () {
+            function refreshCSS() {
+                var sheets = [].slice.call(document.getElementsByTagName("link"));
+                var head = document.getElementsByTagName("head")[0];
+                for (var i = 0; i < sheets.length; ++i) {
+                    var elem = sheets[i];
+                    var parent = elem.parentElement || head;
+                    parent.removeChild(elem);
+                    var rel = elem.rel;
+                    if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+                        var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+                        elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+                    }
+                    parent.appendChild(elem);
+                }
+            }
+            var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+            var address = protocol + window.location.host + window.location.pathname + '/ws';
+            var socket = new WebSocket(address);
+            socket.onmessage = function (msg) {
+                if (msg.data == 'reload') window.location.reload();
+                else if (msg.data == 'refreshcss') refreshCSS();
+            };
+            if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+                console.log('Live reload enabled.');
+                sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+            }
+        })();
+    }
+    else {
+        console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+    }
+	// ]]
 </script>
 
 </html>
